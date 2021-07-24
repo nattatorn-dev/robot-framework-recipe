@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.9.2 on darwin)" generated="20210724 17:45:32.877" rpa="false">
+<suite id="s1" name="Api" source="/Users/nattatorn.yuch/workspace/robotframework-api-example-test-suite/api.robot">
+<kw name="Ping Server" type="setup">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>ping</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=True</arg>
+</arguments>
+<msg timestamp="20210724 17:45:33.041" level="INFO">Creating Session using : alias=ping, url=http://localhost, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20210724 17:45:33.041" endtime="20210724 17:45:33.042"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>ping</arg>
+<arg>uri=/system/health</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20210724 17:45:33.057" level="INFO">Get Request using : alias=ping, uri=/system/health, headers=None json=None</msg>
+<msg timestamp="20210724 17:45:33.057" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210724 17:45:33.042" endtime="20210724 17:45:33.057"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20210724 17:45:33.058" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210724 17:45:33.057" endtime="20210724 17:45:33.058"></status>
+</kw>
+<status status="PASS" starttime="20210724 17:45:33.041" endtime="20210724 17:45:33.058"></status>
+</kw>
+<test id="s1-t1" name="UPLOAD CONFIGURATION BY .CSV FILE">
+<kw name="UPLOAD CONFIGURATION BY .CSV FILE">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>Upload configuration by .csv file</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=True</arg>
+</arguments>
+<msg timestamp="20210724 17:45:33.061" level="INFO">Creating Session using : alias=Upload configuration by .csv file, url=http://localhost, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20210724 17:45:33.060" endtime="20210724 17:45:33.061"></status>
+</kw>
+<kw name="Upload File" library="RequestLib">
+<arguments>
+<arg>${BASE_URL}${CONFIGURATIONS}/upload/csv</arg>
+<arg>configuration.csv</arg>
+<arg>/Users/nattatorn.yuch/workspace/robotframework-api-example-test-suite${/}devData${/}configuration.csv</arg>
+<arg>text/csv</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20210724 17:45:33.090" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210724 17:45:33.061" endtime="20210724 17:45:33.090"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20210724 17:45:33.091" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210724 17:45:33.090" endtime="20210724 17:45:33.091"></status>
+</kw>
+<status status="PASS" starttime="20210724 17:45:33.059" endtime="20210724 17:45:33.091"></status>
+</kw>
+<tags>
+<tag>POST</tag>
+</tags>
+<timeout value="1 minute"></timeout>
+<status status="PASS" starttime="20210724 17:45:33.058" endtime="20210724 17:45:33.091" critical="yes"></status>
+</test>
+<test id="s1-t2" name="GET CONFIGURATION BY NAME">
+<kw name="GET CONFIGURATION BY NAME">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>Get configuration by name</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=True</arg>
+</arguments>
+<msg timestamp="20210724 17:45:33.092" level="INFO">Creating Session using : alias=Get configuration by name, url=http://localhost, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20210724 17:45:33.092" endtime="20210724 17:45:33.092"></status>
+</kw>
+<kw name="Get Request" library="RequestsLibrary">
+<doc>Send a GET request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>Get configuration by name</arg>
+<arg>uri=${CONFIGURATIONS}</arg>
+<arg>params=name=${CONFIGURATION_NAME}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20210724 17:45:33.121" level="INFO">Get Request using : alias=Get configuration by name, uri=/v1/configurations, headers=None json=None</msg>
+<msg timestamp="20210724 17:45:33.121" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210724 17:45:33.092" endtime="20210724 17:45:33.121"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${CONFIGURATION_NAME}</arg>
+<arg>${response.json()}[name]</arg>
+</arguments>
+<status status="PASS" starttime="20210724 17:45:33.121" endtime="20210724 17:45:33.121"></status>
+</kw>
+<status status="PASS" starttime="20210724 17:45:33.092" endtime="20210724 17:45:33.121"></status>
+</kw>
+<tags>
+<tag>GET</tag>
+</tags>
+<timeout value="1 minute"></timeout>
+<status status="PASS" starttime="20210724 17:45:33.091" endtime="20210724 17:45:33.122" critical="yes"></status>
+</test>
+<test id="s1-t3" name="Generate ID">
+<kw name="Generate ID">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>projectId=${WFM_INSTALLATION_PROJECT}</arg>
+</arguments>
+<assign>
+<var>${data}</var>
+</assign>
+<msg timestamp="20210724 17:45:33.123" level="INFO">${data} = {'projectId': '5cf0ad79b603c7605955bc7f'}</msg>
+<status status="PASS" starttime="20210724 17:45:33.122" endtime="20210724 17:45:33.123"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>type=${TASK}</arg>
+<arg>data=${data}</arg>
+</arguments>
+<assign>
+<var>${requestGenerator}</var>
+</assign>
+<msg timestamp="20210724 17:45:33.123" level="INFO">${requestGenerator} = {'type': 'task', 'data': {'projectId': '5cf0ad79b603c7605955bc7f'}}</msg>
+<status status="PASS" starttime="20210724 17:45:33.123" endtime="20210724 17:45:33.123"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=${CONTENT_TYPE_JSON}</arg>
+<arg>User-Agent=RobotFramework</arg>
+</arguments>
+<assign>
+<var>${HEADERS}</var>
+</assign>
+<msg timestamp="20210724 17:45:33.123" level="INFO">${HEADERS} = {'Content-Type': 'application/json', 'User-Agent': 'RobotFramework'}</msg>
+<status status="PASS" starttime="20210724 17:45:33.123" endtime="20210724 17:45:33.123"></status>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>Generate ID</arg>
+<arg>${BASE_URL}</arg>
+<arg>verify=True</arg>
+</arguments>
+<msg timestamp="20210724 17:45:33.124" level="INFO">Creating Session using : alias=Generate ID, url=http://localhost, headers={},                     cookies=None, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20210724 17:45:33.124" endtime="20210724 17:45:33.124"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>Generate ID</arg>
+<arg>uri=${GENERATORS}</arg>
+<arg>data=${requestGenerator}</arg>
+<arg>headers=${HEADERS}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20210724 17:45:33.129" level="INFO">Post Request using : alias=Generate ID, uri=/v1/generators, data={"type": "task", "data": {"projectId": "5cf0ad79b603c7605955bc7f"}}, headers={'Content-Type': 'application/json', 'User-Agent': 'RobotFramework'}, files=None, allow_redirects=True </msg>
+<msg timestamp="20210724 17:45:33.129" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210724 17:45:33.124" endtime="20210724 17:45:33.129"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+</arguments>
+<msg timestamp="20210724 17:45:33.130" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20210724 17:45:33.129" endtime="20210724 17:45:33.130"></status>
+</kw>
+<kw name="Element Should Exist" library="JsonValidator">
+<doc>Check the existence of one or more elements, matching [ http://jsonselect.org/ | JSONSelect] expression.</doc>
+<arguments>
+<arg>${response.content}</arg>
+<arg>.id</arg>
+</arguments>
+<status status="PASS" starttime="20210724 17:45:33.130" endtime="20210724 17:45:33.130"></status>
+</kw>
+<status status="PASS" starttime="20210724 17:45:33.122" endtime="20210724 17:45:33.130"></status>
+</kw>
+<tags>
+<tag>POST</tag>
+</tags>
+<timeout value="1 minute"></timeout>
+<status status="PASS" starttime="20210724 17:45:33.122" endtime="20210724 17:45:33.131" critical="yes"></status>
+</test>
+<doc>API Test</doc>
+<status status="PASS" starttime="20210724 17:45:32.878" endtime="20210724 17:45:33.131"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0">Critical Tests</stat>
+<stat pass="3" fail="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0">GET</stat>
+<stat pass="2" fail="0">POST</stat>
+</tag>
+<suite>
+<stat pass="3" fail="0" id="s1" name="Api">Api</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

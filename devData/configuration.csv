@@ -1,0 +1,20 @@
+Config Name:,idGeneratorConfig,,,,,
+,,,,,,
+Type,Project,,Component1,Component2,Component3,Component4
+type,projectId,,component1,component2,component3,component4
+trip,5ec78aecf3a41244b9031586,,"""ODMTR""",randomNumber(2),"date(""YYYYMMDDss"")",
+trip,5ec797eaf3a41244b903ade1,,"""ODMTR""",randomNumber(2),"date(""YYYYMMDDss"")",
+trip,5f895cb6a009ca2df08315cb,,"""WFM-TR-""","date(""YYMMDD"")",randomNumber(6),
+trip,5cf0ad79b603c7605955bc7f,,"""WFM-TR-""","date(""YYMMDD"")",randomNumber(6),
+trip,automateTest,,"""AUTO""","date(""YYMMDD"")",randomNumber(6),"hashSequence(""AUTO"")"
+trip,,,"""TR""",randomNumber(6),,
+task,5ec78aecf3a41244b9031586,,"date(""YY"")","""CPFM""","""-TA""","hashSequence(""CPFM"")"
+task,5ec797eaf3a41244b903ade1,,"date(""YY"")","""SEND""","""-TA""","hashSequence(""SEND"")"
+task,5f895cb6a009ca2df08315cb,,"""WFM-TA-""","date(""YYMMDD"")",randomNumber(6),
+task,5cf0ad79b603c7605955bc7f,,"get(""information.appointmentInformation.circuitNo"", """")","""-""","date(""YYMMDD"")",randomNumber(6)
+task,automateTestString,,"""AUTO""",,,
+task,automateTestDate,,"date(""YYMMDD"")",,,
+task,automateTestGetDataDefualt,,"get(""dataField"", ""TA"")",,,
+task,automateTestGetData,,"get(""dataField"")",,,
+task,automateTestNextSeq,,"nextSeq(""AUTO"", 6)",,,
+task,,,"date(""YY"")","""DRIVS""","""-TA""","nextSeq(""DRIVS"", 4)"
