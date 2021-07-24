@@ -18,3 +18,12 @@ By default it will run on the live site on the web, this can be changed at the c
 ```sh
 Log To Console    ${response.json()}
 ```
+
+#### RUN
+```sh
+robot -v ENV:local testcases/
+```
+##### Run Only Sanity Testing
+```sh
+robot -v ENV:local -i sanity testcases/
+```
