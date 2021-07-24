@@ -59,6 +59,7 @@ UPLOAD CONFIGURATION BY .CSV FILE
 GET CONFIGURATION BY NAME
     Create Session      Get configuration by name    ${BASE_URL}    verify=True
     ${response}=        Get Request    Get configuration by name    uri=${CONFIGURATIONS}    params=name=${CONFIGURATION_NAME}
+    Should Be Equal As Strings    ${response.status_code}    200
     Should Be Equal As Strings    ${CONFIGURATION_NAME}    ${response.json()}[name]
 
 
