@@ -35,7 +35,10 @@ TC_02 GET CONFIGURATION BY NAME
 TC_03 GET FACTOR OF ID GENERATOR BY REQUEST
     GET FACTOR OF ID GENERATOR BY REQUEST
 
-TC_04 Generate ID
+TC_04 CLEAR_CONFIGURATION_CACHE
+    CLEAR_CONFIGURATION_CACHE
+
+TC_05 Generate ID
     [Documentation]    To generate id work success
     [Tags]  Sanity
     Generate ID
@@ -74,6 +77,14 @@ GET FACTOR OF ID GENERATOR BY REQUEST
     ${response}=      Post Request     ${session}    uri=${CONFIGURATIONS}/test    params=name=${CONFIGURATION_NAME}    data=${requestGenerator}    headers=${HEADERS}
     Should Be Equal As Strings    ${response.status_code}    200
     Element should exist    ${response.content}    .component1:contains("date('YY')")
+    Element should exist    ${response.content}    .component2:contains("'SEND'")
+    Element should exist    ${response.content}    .component3:contains("'-TA'")
+    Element should exist    ${response.content}    .component4:contains("hashSequence('SEND')")
+
+
+CLEAR_CONFIGURATION_CACHE
+    ${response}=      Post Request     ${session}    uri=${CONFIGURATIONS}/clear    params=name=${CONFIGURATION_NAME}
+    Should Be Equal As Strings    ${response.status_code}    200
 
 
 Generate ID
