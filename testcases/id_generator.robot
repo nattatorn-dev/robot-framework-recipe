@@ -24,26 +24,26 @@ ${TASK}    task
 
 
 ***Test Cases***
-TC_01 UPLOAD CONFIGURATION BY .CSV FILE
-    [Documentation]    To upload configuration by .csv file work success
+TC_01 Upload configuration by .csv file should success
     [Tags]  Sanity
-    UPLOAD CONFIGURATION BY .CSV FILE
+    Upload configuration by .csv file
 
-TC_02 GET CONFIGURATION BY NAME
-    GET CONFIGURATION BY NAME
+TC_02 get configuration by name should success
+    Get configuration by name
 
-TC_03 GET FACTOR OF ID GENERATOR BY REQUEST
-    GET FACTOR OF ID GENERATOR BY REQUEST
+TC_03 Get factor of ID Generator by request should success
+    Get factor of ID Generator by request
 
-TC_04 CLEAR_CONFIGURATION_CACHE
-    CLEAR_CONFIGURATION_CACHE
+TC_04 Clear configuration cache should success
+    Clear configuration cache
 
-TC_05 Generate ID
-    [Documentation]    To generate id work success
+TC_05 Generate ID should success
     [Tags]  Sanity
-    Generate ID
+    Generate ID should success
 
-
+TC_06 Generate ID with invalid data request should fail
+    [Tags]  Sanity
+    Generate ID with invalid data request should fail
 
 ***Keywords***
 Session
@@ -57,18 +57,18 @@ Ping Server
     Should Be Equal As Strings    ${response.status_code}    200
 
 
-UPLOAD CONFIGURATION BY .CSV FILE
+Upload configuration by .csv file
     ${response}=        upload_file    ${BASE_URL}${CONFIGURATIONS}/upload/csv    configuration.csv    ${CURDIR}${/}testdata${/}configuration.csv    text/csv
     Should Be Equal As Strings    ${response.status_code}    200
 
 
-GET CONFIGURATION BY NAME
+Get configuration by name
     ${response}=        Get Request     ${session}    uri=${CONFIGURATIONS}    params=name=${CONFIGURATION_NAME}
     Should Be Equal As Strings    ${response.status_code}    200
     Should Be Equal As Strings    ${CONFIGURATION_NAME}    ${response.json()}[name]
 
 
-GET FACTOR OF ID GENERATOR BY REQUEST
+Get factor of ID Generator by request
     ${requestGenerator}=        Create Dictionary
     ...                         type=${TASK}
     ...                         projectId=${ODM_SENDIT_COURIER_PROJECT}
@@ -82,19 +82,34 @@ GET FACTOR OF ID GENERATOR BY REQUEST
     Element should exist    ${response.content}    .component4:contains("hashSequence('SEND')")
 
 
-CLEAR_CONFIGURATION_CACHE
+Clear configuration cache
     ${response}=      Post Request     ${session}    uri=${CONFIGURATIONS}/clear    params=name=${CONFIGURATION_NAME}
     Should Be Equal As Strings    ${response.status_code}    200
 
 
-Generate ID
+Generate ID should success
     ${data}=            Create Dictionary
     ...                 projectId=${WFM_INSTALLATION_PROJECT}
     ${requestGenerator}=        Create Dictionary
     ...                         type=${TASK}
     ...                         data=${data}
+    ${response}=        Generate ID     ${requestGenerator}     200
+    Element should exist    ${response.content}    .id
+
+
+Generate ID with invalid data request should fail
+    ${data}=            Create Dictionary
+    ...                 projectId=${WFM_INSTALLATION_PROJECT}
+    ${requestGenerator}=        Create Dictionary
+    ...                         type=${EMPTY}
+    ${response}=        Generate ID     ${requestGenerator}     400
+    Element should not exist    ${response.content}    .id
+
+
+Generate ID
+    [Arguments]    ${data}    ${expected_status_code}
     ${HEADERS}=          Create Dictionary
     ...                  Content-Type=${CONTENT_TYPE_JSON}
-    ${response}=      Post Request     ${session}    uri=${GENERATORS}    data=${requestGenerator}    headers=${HEADERS}
-    Should Be Equal As Strings    ${response.status_code}    200
-    Element should exist    ${response.content}    .id
+    ${response}=      Post Request     ${session}     uri=${GENERATORS}    data=${data}    headers=${HEADERS}
+    Should Be Equal As Strings    ${response.status_code}    ${expected_status_code}
+    [Return]    ${response}
