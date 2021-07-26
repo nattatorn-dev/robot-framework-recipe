@@ -1,0 +1,45 @@
+{
+  "name": "idGeneratorConfigJSON",
+  "header": {
+    "inputHeaders": [
+      {
+        "name": "Type",
+        "field": "type"
+      },
+      {
+        "name": "Project",
+        "field": "projectId"
+      }
+    ],
+    "outputHeaders": [
+      {
+        "name": "Component1",
+        "field": "component1"
+      },
+      {
+        "name": "Component2",
+        "field": "component2"
+      }
+    ]
+  },
+  "records": [
+    {
+      "inputColumns": [
+        {
+          "expression": "trip"
+        },
+        {
+          "expression": "5ec78aecf3a41244b9031586"
+        }
+      ],
+      "outputColumns": [
+        {
+          "expression": "'ODMTR'"
+        },
+        {
+          "expression": "randomNumber(2)"
+        }
+      ]
+    }
+  ]
+}
