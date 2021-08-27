@@ -1,7 +1,7 @@
 *** Settings ***
-Library             RequestsLibrary
-Library             Collections
-Library             JsonValidator
-Library             Process
-Library             OperatingSystem
-Variables           configs/${ENV}/env_config.yaml
+Library    RequestsLibrary
+Library    Collections
+Library    Process
+Library    OperatingSystem
+Variables    ../environments/${env}.py
+Resource    ./common.keyword.robot

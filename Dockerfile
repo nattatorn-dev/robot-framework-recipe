@@ -1,0 +1,10 @@
+FROM python:3.9.1-alpine
+
+WORKDIR /home/robot
+
+RUN pip3 install requests==2.26.0 \
+robotframework==4.0.2 \
+robotframework-jsonlibrary==0.3.1 \
+robotframework-requests==0.7.2 \
+robotframework-mongodb-library==3.0 \
+pymongo==3.11.2

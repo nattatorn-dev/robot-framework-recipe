@@ -27,3 +27,9 @@ robot -v ENV:local testcases/
 ```sh
 robot -v ENV:local -i sanity testcases/
 ```
+
+
+#### Docker Compose
+```sh
+docker-compose up -d --env-file mongodb.env --env-file robotframework.env
+```

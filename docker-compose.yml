@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  robotframework:
+    container_name: robotframework
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./environments:/home/robot/environments
+      - ./lib:/home/robot/lib
+      - ./resources:/home/robot/resources
+      - ./testcases:/home/robot/testcases
+      - ./requirements.txt:/home/robot/requirements.txt
+      - ./robotframework-data:/home/robot/reports
+    env_file:
+      - .robotframework.env
+    command: >
+      sh -c "robot -d ./reports -v ENV:local -i sanity testcases/"
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    networks:
+      - testing
+
+  mongodb:
+    container_name: mongo
+    image: mongo:5.0.2
+    restart: always
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - ./mongo-data:/data/db
+    env_file:
+      - .mongodb.env
+    ports:
+      - 27017:27017
+    networks:
+      - testing
+
+networks:
+  testing:

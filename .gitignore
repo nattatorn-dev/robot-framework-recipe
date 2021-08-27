@@ -28,3 +28,5 @@ __pycache__
 .classpath
 .settings
 .jython_cache
+mongo-data
+robotframework-data
