@@ -14,22 +14,17 @@ Once everything has been installed you can run the test suite from the command l
 
 By default it will run on the live site on the web, this can be changed at the command line to point to a local instance of restfulbooker by running ```robot -v BASE_URL:127.0.0.1:80 api.robot``` or changing the ${BASEURL} variable in the api.robot file
 
-#### Log To Console
-```sh
-Log To Console    ${response.json()}
-```
-
 #### RUN
 ```sh
 robot -v ENV:local testcases/
 ```
-##### Run Only Sanity Testing
+#### Run Only Sanity Testing
 ```sh
 robot -v ENV:local -i sanity testcases/
 ```
 
-
 #### Docker Compose
+
 ```sh
-docker-compose up -d --env-file mongodb.env --env-file robotframework.env
+docker-compose up -d
 ```

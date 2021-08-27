@@ -29,6 +29,7 @@ Remove ALL Testing License Plate On DB
     ...    ${query_string}
 
 Create Vehicle Records On DB
+    [Timeout]    10 s
     [Arguments]    ${MONGO_DATABASE}    ${MONGO_COLLECTION}    ${query}
     Comment    Connect to MongoDB Server
     Connect To Mongodb    ${MONGO_URI}
@@ -39,6 +40,7 @@ Create Vehicle Records On DB
     Disconnect From Mongodb
 
 Remove Vehicle Records On DB
+    [Timeout]    10 s
     [Arguments]    ${MONGO_DATABASE}    ${MONGO_COLLECTION}    ${query}
     Comment    Connect to MongoDB Server
     Connect To Mongodb    ${MONGO_URI}

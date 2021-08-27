@@ -14,9 +14,9 @@ services:
       - ./requirements.txt:/home/robot/requirements.txt
       - ./robotframework-data:/home/robot/reports
     env_file:
-      - .robotframework.env
+      - .env
     command: >
-      sh -c "robot -d ./reports -v ENV:local -i sanity testcases/"
+      sh -c "robot -d ./reports -v ENV:${ENV} -i ${TAG} testcases/"
     restart: unless-stopped
     depends_on:
       - mongodb

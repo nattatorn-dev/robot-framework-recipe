@@ -1,2 +1,2 @@
 BASE_URL = "http://localhost"
-MONGO_URI = "mongodb://localhost:27017"
+MONGO_URI = "mongodb://mongoadmin:password@mongodb:27017"
