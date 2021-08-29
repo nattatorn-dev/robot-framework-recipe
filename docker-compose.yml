@@ -16,9 +16,29 @@ services:
       - .env
     command: >
       sh -c "robot -d ./reports -v ENV:${ENV} -i ${TAG} testcases/"
-    restart: unless-stopped
+    restart: on-failure:3
     depends_on:
-      - mongodb
+      app-fleet-api:
+        condition: service_healthy
+    networks:
+      - testing
+
+  app-fleet-api:
+    image: app-fleet-api
+    restart: always
+    build: ./backend
+    env_file:
+      - ./backend/dev.env
+    ports:
+      - 80:80
+    healthcheck:
+      test: wget --no-verbose --spider http://localhost
+      interval: 3s
+      timeout: 1s
+      retries: 3
+    depends_on:
+      mongodb:
+        condition: service_healthy
     networks:
       - testing
 
@@ -33,6 +53,16 @@ services:
       - .mongodb.env
     ports:
       - 27017:27017
+    healthcheck:
+      test:
+        - CMD
+        - mongo
+        - --eval
+        - "db.adminCommand('ping')"
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
     networks:
       - testing
 

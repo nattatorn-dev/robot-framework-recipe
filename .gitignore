@@ -30,3 +30,4 @@ __pycache__
 .jython_cache
 mongo-data
 robotframework-data
+node_modules

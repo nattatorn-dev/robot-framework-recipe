@@ -1,11 +1,16 @@
 *** Settings ***
 Library    MongoDBLibrary
+Library    DateTime
 
 *** Keywords ***
 Create Testing License Plate On DB
     [Arguments]    ${licensePlate}
+    ${now}=    Get Current Date    time_zone=UTC
+    ${date}=    Convert Date    ${now}    result_format=%Y-%m-%d %H:%M:%S.%fZ
     ${query}=    Create Dictionary
     ...    licensePlate=AUTOMATION_TESTING_${licensePlate}
+    ...    status=Active
+    ...    createdAt=${date}
     ${query_string}=      evaluate        json.dumps(${query})
     Create Vehicle Records On DB    fleets    vehicles
     ...    ${query_string}

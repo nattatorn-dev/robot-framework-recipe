@@ -1,0 +1,97 @@
+{
+	"info": {
+		"_postman_id": "26643431-7e20-436b-9b9e-381f859f2091",
+		"name": "Vehicle API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Vehicle",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"licensePlate\": \"กข 4444\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/vehicles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"vehicles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Vehicle",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/vehicles/6129db88673abec2eb2f72d7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"vehicles",
+						"6129db88673abec2eb2f72d7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Vehicles",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/vehicles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"vehicles"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
