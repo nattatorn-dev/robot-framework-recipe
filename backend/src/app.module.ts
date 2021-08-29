@@ -9,7 +9,13 @@ import { MongooseModule } from '@nestjs/mongoose';
   imports: [
     ConfigModule.forRoot({ envFilePath: `${process.env.NODE_ENV}.env` }),
     VehicleModule,
-    MongooseModule.forRoot(process.env.MONGO_URI),
+    MongooseModule.forRootAsync({
+      useFactory: async () => ({
+        uri: process.env.MONGO_URI,
+        useNewUrlParser: true,
+        useCreateIndex: true,
+      }),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
