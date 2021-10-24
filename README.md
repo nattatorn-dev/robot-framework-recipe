@@ -26,5 +26,9 @@ robot -v ENV:local -i sanity testcases/
 #### Docker Compose
 
 ```sh
+docker-compose  up -d --build
+```
+
+```sh
 docker-compose up -d
 ```

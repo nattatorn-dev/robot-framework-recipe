@@ -15,6 +15,7 @@ TC01 Create Vehicle Successfully
 TC02_Find Vehicle Successfully
     Find Vehicle Successfully
 
+
 ***Keywords***
 Setup
     Session
@@ -44,4 +45,30 @@ Find Vehicle Successfully
     ...    headers=${headers}
     Should Be Equal As Strings    ${response.status_code}    200
     ${count}=    Get length    ${response.json()}
-    should be equal as numbers  ${count}  3
+    should be equal as numbers    ${count}    3
+
+    ${vehicle}=    Set variable    ${response.json()[0]}
+    ${licensePlate}=    Set variable    ${vehicle['licensePlate']}
+
+    # Loop Wait Status Is Active Status     ${licensePlate}     Active
+    Wait Status Is Active Status    ${licensePlate}    Active
+
+Is Active Status
+    [Arguments]    ${licensePlate}    ${status}
+    ${currentStatus}    Find Status    ${licensePlate}
+    Should Match    ${currentStatus}    ${status}
+
+Wait Status Is Active Status
+    [Arguments]    ${licensePlate}    ${status}
+    Wait Until Keyword Succeeds    6 seconds    2 seconds    Check Status
+    ...    ${licensePlate}    ${status}
+
+# Loop Wait Status Is Active Status
+#     [Timeout]    3 s
+#     [Arguments]    ${licensePlate}    ${status}
+#     FOR    ${i}    IN RANGE    999999
+#     ${currentStatus}    Find Status    ${licensePlate}
+#     Log To Console    ${currentStatus}
+#     Exit For Loop If    "${currentStatus}" == "${status}"
+#     END
+#     Log    Check Active Status Exited

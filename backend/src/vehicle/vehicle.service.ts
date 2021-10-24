@@ -31,7 +31,7 @@ export class VehicleService {
       .exec();
 
     if (vehicle) {
-      return vehicle
+      return vehicle;
     }
 
     throw new NotFoundException(`Vehicle with id '${id}' not found`);
