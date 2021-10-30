@@ -1,10 +1,21 @@
 *** Settings ***
-Documentation    Vehicle
-Resource    ../resources/imports.robot
-Suite Setup    Setup
-Suite Teardown    Teardown
-Test Timeout    10 s
+Documentation    Tests to create that vehicle succeed and
+...              fail correctly 
 
+Resource    ../resources/imports.robot
+Resource    ../resources/authen/authen.keyword.robot
+
+Suite Setup    Run Keywords
+...    Session    AND
+...    Login    ${ADMIN_USER}    ${ADMIN_PASSWORD}    AND
+...    Prepare Test Data
+
+Suite Teardown    Run Keywords
+...    Logout
+...    Remove ALL Testing License Plate On DB
+...    Delete All Sessions
+
+Test Timeout    10 s
 
 
 *** Test Case ***
@@ -15,16 +26,10 @@ TC01 Create Vehicle Successfully
 TC02_Find Vehicle Successfully
     Find Vehicle Successfully
 
-
 ***Keywords***
-Setup
-    Session
+Prepare Test Data
     Create Testing License Plate On DB    ฮห 2231
     Create Testing License Plate On DB    ฟก 7673
-
-Teardown
-    Remove ALL Testing License Plate On DB
-    Delete All Sessions
 
 Session
     [Documentation]    Create Session
@@ -43,6 +48,7 @@ Find Vehicle Successfully
     ${headers}=    Create Dictionary    Content-Type=${CONTENT_TYPE_JSON}    
     ${response}=    Get Request    ${session}    uri=/vehicles
     ...    headers=${headers}
+
     Should Be Equal As Strings    ${response.status_code}    200
     ${count}=    Get length    ${response.json()}
     should be equal as numbers    ${count}    3

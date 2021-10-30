@@ -53,7 +53,6 @@ Check Status
 #     @{list}=    Split String    ${singleQuote}    ,
 #     Remove Values from list    ${list}    ${EMPTY}
 #     ${status}=    Set Variable    ${list[1].strip()}
-
 #     [Return]    ${status}
 
 Remove ALL Testing License Plate On DB

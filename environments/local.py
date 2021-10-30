@@ -1,2 +1,5 @@
 BASE_URL = "http://localhost"
+AUTHENTICATION_BASE_URL = ""
 MONGO_URI = "mongodb://admin:password@localhost:27017"
+ADMIN_USER = ""
+ADMIN_PASSWORD = ""

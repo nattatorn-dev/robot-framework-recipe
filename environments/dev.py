@@ -1,2 +1,5 @@
 BASE_URL = "http://app-fleet-api"
+AUTHENTICATION_BASE_URL = ""
 MONGO_URI = "mongodb://fleets:password1234@mongodb:27017/fleets"
+ADMIN_USER = ""
+ADMIN_PASSWORD = ""
