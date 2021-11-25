@@ -58,6 +58,7 @@ Find Vehicle Successfully
 
     # Loop Wait Status Is Active Status     ${licensePlate}     Active
     Wait Status Is Active Status    ${licensePlate}    Active
+    Update Inactive Vehicle Records Status By License Plate     ${licensePlate}
 
 Is Active Status
     [Arguments]    ${licensePlate}    ${status}

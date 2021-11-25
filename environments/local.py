@@ -1,5 +1,5 @@
 BASE_URL = "http://localhost"
-AUTHENTICATION_BASE_URL = ""
+AUTHENTICATION_BASE_URL = "https://api.staging.true-e-logistics.com/4pl-authentication"
 MONGO_URI = "mongodb://admin:password@localhost:27017"
-ADMIN_USER = ""
-ADMIN_PASSWORD = ""
+ADMIN_USER = "craftsuperadmin"
+ADMIN_PASSWORD = "test1234"

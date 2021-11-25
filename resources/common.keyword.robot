@@ -65,6 +65,16 @@ Remove ALL Testing License Plate On DB
     Remove Vehicle Records On DB    fleets    vehicles
     ...    ${query_string}
 
+Update Inactive Vehicle Records Status By License Plate
+    [Arguments]    ${licensePlate}
+    Comment    Connect to MongoDB Server
+    Connect To Mongodb    ${MONGO_URI}
+    ${output}=    Retrieve And Update One Mongodb Record    fleets    vehicles
+    ...    {"licensePlate": "${licensePlate}", "status" : "Active"}	{"$set": {"status" : "Inactive"}}
+    Log    ${output}
+    Comment    Disconnect from MongoDB Server
+    Disconnect From Mongodb
+
 Create Vehicle Records On DB
     [Timeout]    10 s
     [Arguments]    ${MONGO_DATABASE}    ${MONGO_COLLECTION}    ${query}
